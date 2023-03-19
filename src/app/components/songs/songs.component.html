@@ -1,5 +1,19 @@
 <div>
     <ul>
-        <li *ngFor="let song of songs$ | async">{{ song.title }}</li>
+        <li *ngFor="let song of songs$ | async">
+            <dl>
+                <dt>Titre</dt>
+                <dd>{{ song.title }}</dd>
+
+                <dt>Artiste</dt>
+                <dd>{{ song.artist }}</dd>
+
+                <dt>Longueur</dt>
+                <dd>{{ song.length }} secondes</dd>
+
+                <dt>Youtube</dt>
+                <dd>{{ song.youtube }}</dd>
+            </dl>
+        </li>
     </ul>
 </div>
