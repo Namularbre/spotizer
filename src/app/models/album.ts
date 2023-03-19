@@ -1,4 +1,5 @@
 import { AlbumType } from "./albumtype";
+import { Artist } from "./artist";
 import { Song } from "./song";
 
 export class Album {
