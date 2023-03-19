@@ -18,4 +18,9 @@ export class SongService {
     return of(this.songs);
   }
 
+  getSong(title : string) : Observable<Song> {
+    const fistSong : number = 0;
+    return of(this.songs.filter(song => song.title === title)[fistSong]);
+  }
+
 }
