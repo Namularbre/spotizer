@@ -1,4 +1,10 @@
 <h2>Nos musiques</h2>
+
+<form>
+    <label>Rechercher une musique par titre</label>
+    <input type="text">
+</form>
+
 <div *ngIf="songs$">
     <ul>
         <li *ngFor="let song of songs$ | async">
