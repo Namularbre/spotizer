@@ -1,0 +1,12 @@
+<h2>Nos artistes</h2>
+
+<div *ngIf="artists$">
+    <ul>
+        <li *ngFor="let artist of artists$ | async">
+            <dl>
+                <dt>Nom</dt>
+                <dd>{{ artist.name }}</dd>
+            </dl>
+        </li>
+    </ul>
+</div>
