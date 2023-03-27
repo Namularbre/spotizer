@@ -3,7 +3,9 @@
 
     <div *ngIf="albums$ | async as albums">
         <ul>
-            <!--<li *ngFor="let album of albums | async"></li>-->
+            <li *ngFor="let album in albums | async">
+                <p>{{ album.title }}</p>
+            </li>
         </ul>
     </div>
 </div>
