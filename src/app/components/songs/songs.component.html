@@ -8,12 +8,12 @@
 <div *ngIf="songs$">
     <ul>
         <li *ngFor="let song of songs$ | async">
-            <dl>
+            <dl id="{{ song.id }}">
                 <dt>Titre</dt>
                 <dd>{{ song.title }}</dd>
 
                 <dt>Artiste</dt>
-                <dd><app-artist [artistUrl]="song.artist"></app-artist></dd>
+                <dd><app-artist-name [artistUrl]="song.artist"></app-artist-name></dd>
 
                 <dt>Longueur</dt>
                 <dd>{{ song.length }} secondes</dd>
