@@ -4,7 +4,10 @@
     <div *ngIf="albums$ | async as albums">
         <ul>
             <li *ngFor="let album in albums | async">
-                <p>{{ album.title }}</p>
+                <h3>{{ album.title }}</h3>
+                <a href="/album/{{ album.id }}">
+                    <img src="{{ album.image }}" alt="{{ album.title }}">
+                </a>
             </li>
         </ul>
     </div>

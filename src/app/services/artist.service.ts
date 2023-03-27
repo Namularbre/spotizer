@@ -39,6 +39,10 @@ export class ArtistService {
   }
 
   getAlbums(url : string) : Observable<Album[]> {
+	console.log(url);
+
+	let album : Album[] = [];
+	
 	return this.httpClient.get<Album[]>(url).pipe(
 		map((rawAlbums : Object[]) => {
 			return rawAlbums.map(rawAlbum => <Album> rawAlbum);

@@ -13,7 +13,7 @@
                 <dd>{{ song.title }}</dd>
 
                 <dt>Artiste</dt>
-                <dd><a href="{{ song.artist }}">Voir l'artiste</a></dd>
+                <dd><app-artist [artistUrl]="song.artist"></app-artist></dd>
 
                 <dt>Longueur</dt>
                 <dd>{{ song.length }} secondes</dd>

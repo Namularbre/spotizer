@@ -19,7 +19,9 @@ export class ArtistComponent {
   constructor(private service : ArtistService) {}
 
   ngOnInit() {
-    this.artist$ = this.service.getArtist(this.artistUrl);
+    const url = `https://mmi.unilim.fr/${this.artistUrl}`;
+    
+    this.artist$ = this.service.getArtist(url);
     let albumUrl = this.artist$.pipe();
   }
 
