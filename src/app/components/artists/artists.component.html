@@ -1,6 +1,12 @@
 <h2>Nos artistes</h2>
 
-<div *ngIf="artists$">
+<form (ngSubmit)="onSubmit()" [formGroup]="researchForm">
+    <label for="name">Recherche un artiste</label>
+    <input type="text" formArrayName="name">
+    <button type="submit">Rechercher</button>
+</form>
+
+<div *ngIf="artists$ else noArtists">
     <ul>
         <li *ngFor="let artist of artists$ | async">
             <dl>
@@ -12,3 +18,6 @@
         </li>
     </ul>
 </div>
+<ng-template #noArtists>
+    <p>Il n'y a pas d'artistes qui correspondent à ce nom !</p>
+</ng-template>

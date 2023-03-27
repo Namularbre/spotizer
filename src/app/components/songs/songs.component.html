@@ -6,7 +6,7 @@
     <button type="submit">Rechercher</button>
 </form>
 
-<div *ngIf="songs$">
+<div *ngIf="songs$ else noSongs">
     <ul>
         <li *ngFor="let song of songs$ | async">
             <dl id="{{ song.id }}">
@@ -25,3 +25,6 @@
         </li>
     </ul>
 </div>
+<ng-template #noSongs>
+    <p>Il n'y a pas de musique qui correspond à ce titre !</p>
+</ng-template>

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Artist } from 'src/app/models/artist';
 import { ArtistService } from 'src/app/services/artist.service';
-import { Observable, map } from 'rxjs';
+import { Observable, map, filter } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-artists',
@@ -10,10 +11,21 @@ import { Observable, map } from 'rxjs';
 })
 export class ArtistsComponent {
   artists$! : Observable<Artist[]>;
+  researchForm : FormGroup;
 
-  constructor(private service : ArtistService) {}
+  constructor(private service : ArtistService, private formBuilder : FormBuilder) {
+      this.researchForm = this.formBuilder.group({
+        name : ['', Validators.required]
+      });
+  }
 
   ngOnInit() {
     this.artists$ = this.service.getArtists();
+  }
+
+  onSubmit() {
+    this.artists$ = this.service.getArtists().pipe(
+      map(artists => artists.filter(artist => artist.name.includes(this.researchForm.value.name)))
+    );
   }
 }
