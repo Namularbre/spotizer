@@ -2,11 +2,12 @@
 
 <form (ngSubmit)="onSubmit()" [formGroup]="researchForm">
     <label for="name">Recherche un artiste</label>
-    <input type="text" formArrayName="name">
+    <input type="text" formControlName="name">
     <button type="submit">Rechercher</button>
 </form>
 
 <div *ngIf="artists$ else noArtists">
+    <p>Il y a {{ (artists$ | async)?.length }} résultat(s)</p>
     <ul>
         <li *ngFor="let artist of artists$ | async">
             <dl>

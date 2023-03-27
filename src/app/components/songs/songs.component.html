@@ -7,6 +7,7 @@
 </form>
 
 <div *ngIf="songs$ else noSongs">
+    <p>Il y a {{ (songs$ | async)?.length }} résultat(s)</p>
     <ul>
         <li *ngFor="let song of songs$ | async">
             <dl id="{{ song.id }}">
