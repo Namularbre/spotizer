@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
+import { Album } from '../models/album';
 import { Artist } from '../models/artist';
 
 @Injectable({
@@ -21,12 +22,26 @@ export class ArtistService {
 	);
   }
 
+  getArtist(url : string) : Observable<Artist> {
+	return this.httpClient.get<Artist>(url).pipe(
+		map(rawArtist => {return <Artist> rawArtist})
+	);
+  }
+
   getArtistById(id : number) : Observable<Artist> {
 	const getArtistUrl = `https://mmi.unilim.fr/~morap01/L250/public/index.php/api/artists/${id}`;
 
 	return this.httpClient.get<Artist>(getArtistUrl).pipe(
 		map((rawArtist : Object) => {
 			return <Artist> rawArtist
+		})
+	);
+  }
+
+  getAlbums(url : string) : Observable<Album[]> {
+	return this.httpClient.get<Album[]>(url).pipe(
+		map((rawAlbums : Object[]) => {
+			return rawAlbums.map(rawAlbum => <Album> rawAlbum);
 		})
 	);
   }

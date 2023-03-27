@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { SongService } from 'src/app/services/song.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Song } from 'src/app/models/song';
 
 @Component({

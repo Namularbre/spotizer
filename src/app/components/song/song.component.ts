@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Song } from 'src/app/models/song';
 import { SongService } from 'src/app/services/song.service';
@@ -11,9 +11,12 @@ import { SongService } from 'src/app/services/song.service';
 export class SongComponent {
   song$! : Observable<Song>;
 
+  @Input()
+  title! : string;
+
   constructor(private service : SongService) {}
 
   ngOnInit() {
-    this.song$ = this.service.getSong("");
+    this.song$ = this.service.getSong(this.title);
   }
 }

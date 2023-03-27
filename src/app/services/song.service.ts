@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Song } from '../models/song';
 import { Observable, of, map } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Artist } from '../models/artist';
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,10 @@ export class SongService {
 
   getSongsByName(title : string) : Observable<Song[]> {
     return of(this.songs.filter(song => song.title === title));
+  }
+
+  getSongArtist(APIlink : string) : Observable<Artist> {
+    return this.httpClient.get<Artist>(APIlink);
   }
 
 }

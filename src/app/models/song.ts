@@ -1,5 +1,5 @@
 export class Song {
-    constructor(private readonly _id : number, private _title : string, private _artist : number, private _length : number, private _youtube : string, private _album : number) {}
+    constructor(private readonly _id : number, private _title : string, private _artistId : number, private _length : number, private _youtube : string, private _albumId : number) {}
 
     public get id() : number {
         return this._id;
@@ -10,7 +10,7 @@ export class Song {
     }
 
     public get artist() : number {
-        return this._artist;
+        return this._artistId;
     }
 
     public get length() : number {
