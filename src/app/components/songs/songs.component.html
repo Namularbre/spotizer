@@ -8,23 +8,26 @@
 
 <div *ngIf="songs$ else noSongs">
     <p>Il y a {{ (songs$ | async)?.length }} résultat(s)</p>
-    <ul>
-        <li *ngFor="let song of songs$ | async">
-            <dl id="{{ song.id }}">
-                <dt>Titre</dt>
-                <dd>{{ song.title }}</dd>
-
-                <dt>Artiste</dt>
-                <dd><app-artist-name [artistUrl]="song.artist"></app-artist-name></dd>
-
-                <dt>Longueur</dt>
-                <dd>{{ song.length }} secondes</dd>
-
-                <dt>Youtube</dt>
-                <dd><a href="{{ song.youtube }}">lien</a></dd>
-            </dl>
-        </li>
-    </ul>
+    <table class="table table-striped">
+        <thead style="background-color: silver;">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Artiste</th>
+                <th scope="col">Longueur</th>
+                <th scope="col">Youtube</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let song of songs$ | async">
+                <th id="{{ song.id }}">{{ song.id }}</th>
+                <td>{{ song.title }}</td>
+                <td><app-artist-name [artistUrl]="song.artist"></app-artist-name></td>
+                <td>{{ song.length }} secondes</td>
+                <td><a href="{{ song.youtube }}">lien</a></td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 <ng-template #noSongs>
     <p>Il n'y a pas de musique qui correspond à ce titre !</p>

@@ -8,16 +8,20 @@
 
 <div *ngIf="artists$ else noArtists">
     <p>Il y a {{ (artists$ | async)?.length }} résultat(s)</p>
-    <ul>
-        <li *ngFor="let artist of artists$ | async">
-            <dl>
-                <dt>Nom</dt>
-                <dd>{{ artist.name }}</dd>
-
-                <p>Mettre un lien vers l'affichage de l'artiste</p>
-            </dl>
-        </li>
-    </ul>
+    <table class="table table-striped">
+        <thead style="background-color: silver;">
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Lien (TODO)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let artist of artists$ | async">
+                <td>{{ artist.name }}</td>
+                <td>Lien vers l'affichage de l'artiste</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 <ng-template #noArtists>
     <p>Il n'y a pas d'artistes qui correspondent à ce nom !</p>

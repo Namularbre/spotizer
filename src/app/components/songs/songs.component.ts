@@ -20,6 +20,8 @@ export class SongsComponent {
   }
 
   ngOnInit() {
+    document.getElementById("nav-songs")!.classList.add("active");
+
     this.songs$ = this.service.getSongs();
   }
 
