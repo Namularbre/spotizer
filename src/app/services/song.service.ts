@@ -13,8 +13,18 @@ export class SongService {
 
   constructor(private httpClient : HttpClient) { }
 
-  getSongs() : Observable<Song[]> {
-    const getSongsUrl = "https://mmi.unilim.fr/~morap01/L250/public/index.php/api/songs";
+  getSongs(page : number = 1, search : string = "") : Observable<Song[]> {
+    const getSongsUrl = "https://mmi.unilim.fr/~morap01/L250/public/index.php/api/songs?page="+page+"&title="+search;
+    
+    return this.httpClient.get<Song[]>(getSongsUrl).pipe(
+      map((rawSong : Object[]) => {
+        return rawSong.map(rawSong => <Song> rawSong);
+      })
+    );
+  }
+
+  getSearchedSongs(search : string = "") : Observable<Song[]> {
+    const getSongsUrl = "https://mmi.unilim.fr/~morap01/L250/public/index.php/api/songs?title="+search;
 
     return this.httpClient.get<Song[]>(getSongsUrl).pipe(
       map((rawSong : Object[]) => {

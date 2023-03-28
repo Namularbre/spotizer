@@ -6,7 +6,7 @@
     <button type="submit">Rechercher</button>
 </form>
 
-<div *ngIf="songs$ else noSongs">
+<div *ngIf="songs$ else noSongs" class="d-flex flex-column align-items-center">
     <p>Il y a {{ (songs$ | async)?.length }} résultat(s)</p>
     <table class="table table-striped">
         <thead style="background-color: silver;">
@@ -28,6 +28,19 @@
             </tr>
         </tbody>
     </table>
+    <nav aria-label="songs-pagination">
+        <ul class="pagination">
+          <li class="page-item">
+            <button class="page-link" (click)="onPreviousClick()"><<</button>
+          </li>
+          <li class="page-item">
+            <span id="page-number" class="page-link active">1</span>
+          </li>
+          <li class="page-item">
+            <button class="page-link" (click)="onNextClick()">>></button>
+          </li>
+        </ul>
+    </nav>
 </div>
 <ng-template #noSongs>
     <p>Il n'y a pas de musique qui correspond à ce titre !</p>

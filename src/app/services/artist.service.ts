@@ -12,8 +12,18 @@ export class ArtistService {
 
   constructor(private httpClient : HttpClient) { }
 
-  getArtists() : Observable<Artist[]> {
-	const getArtistsUrl = "https://mmi.unilim.fr/~morap01/L250/public/index.php/api/artists";
+  getArtists(page : number = 1, search : string = "") : Observable<Artist[]> {
+	const getArtistsUrl = "https://mmi.unilim.fr/~morap01/L250/public/index.php/api/artists?page="+page+"&name="+search;
+
+	return this.httpClient.get<Artist[]>(getArtistsUrl).pipe(
+		map((rawArtists : Object[]) => {
+		  return rawArtists.map(rawArtist => <Artist> rawArtist);
+		})
+	);
+  }
+
+  getSearchedArtists(search : string = "") : Observable<Artist[]> {
+	const getArtistsUrl = "https://mmi.unilim.fr/~morap01/L250/public/index.php/api/artists?name="+search;
 
 	return this.httpClient.get<Artist[]>(getArtistsUrl).pipe(
 		map((rawArtists : Object[]) => {

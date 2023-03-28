@@ -12,6 +12,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ArtistsComponent {
   artists$! : Observable<Artist[]>;
   researchForm : FormGroup;
+  searchedField : string = "";
 
   constructor(private service : ArtistService, private formBuilder : FormBuilder) {
       this.researchForm = this.formBuilder.group({
@@ -26,8 +27,30 @@ export class ArtistsComponent {
   }
 
   onSubmit() {
-    this.artists$ = this.service.getArtists().pipe(
-      map(artists => artists.filter(artist => artist.name.includes(this.researchForm.value.name)))
+    this.artists$ = this.service.getSearchedArtists(this.researchForm.value.name);
+    this.searchedField = this.researchForm.value.name;
+    document.getElementById("page-number")!.textContent = "1";
+  }
+
+  onPreviousClick() {
+    let page: number = Number(document.getElementById("page-number")!.textContent);
+    if (page - 1 >= 1) {
+      page -= 1;
+      this.artists$ = this.service.getArtists(page, this.searchedField);
+      document.getElementById("page-number")!.textContent = page.toString();
+    }
+  }
+
+  onNextClick() {
+    let page: number = Number(document.getElementById("page-number")!.textContent);
+    this.service.getArtists(page + 1, this.searchedField).subscribe(
+      (res) => {
+        if (res.length) {
+          page += 1;
+          this.artists$ = this.service.getArtists(page, this.searchedField);
+          document.getElementById("page-number")!.textContent = page.toString();
+        }
+      }
     );
   }
 }
