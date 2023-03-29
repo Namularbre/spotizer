@@ -1,8 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { Artist } from 'src/app/models/artist';
 import { ArtistService } from 'src/app/services/artist.service';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Album } from 'src/app/models/album';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-artist',
@@ -10,19 +11,20 @@ import { Album } from 'src/app/models/album';
   styleUrls: ['./artist.component.css']
 })
 export class ArtistComponent {
-  @Input() 
-  artistUrl! : string;
-
   artist$! : Observable<Artist>;
   albums$! : Observable<Album>;
+  id! : number;
 
-  constructor(private service : ArtistService) {}
+  constructor(private service : ArtistService, private route : ActivatedRoute) {}
 
   ngOnInit() {
-    const url = `https://mmi.unilim.fr/${this.artistUrl}`;
+    console.log("test");
     
-    this.artist$ = this.service.getArtist(url);
-    let albumUrl = this.artist$.pipe();
-  }
+    this.route.params.subscribe(params => {
+      this.id = parseInt(params['id']);
+    });
 
+    const url = `https://mmi.unilim.fr/~morap01/L250/public/index.php/api/artists/${this.id}`;
+    this.artist$ = this.service.getArtist(url);
+  }
 }
