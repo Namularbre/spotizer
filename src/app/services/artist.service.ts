@@ -8,8 +8,6 @@ import { Artist } from '../models/artist';
   providedIn: 'root'
 })
 export class ArtistService {
-  private artists : Artist[] = [];
-
   constructor(private httpClient : HttpClient) { }
 
   getArtists(page : number = 1, search : string = "") : Observable<Artist[]> {
