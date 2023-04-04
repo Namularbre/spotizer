@@ -21,7 +21,7 @@ export class ArtistsComponent {
   }
 
   ngOnInit() {
-    document.getElementById("nav-artists")!.classList.add("active");
+    document.querySelector("#nav-artists")!.classList.add("active");
     
     this.artists$ = this.service.getArtists();
   }

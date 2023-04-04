@@ -1,5 +1,11 @@
 <h2>Albums</h2>
 
+<form (ngSubmit)="onSubmit()" [formGroup]="researchForm">
+    <label for="title">Rechercher un album</label>
+    <input type="text" formArrayName="title">
+    <button type="submit">Rechercher</button>
+</form>
+
 <div *ngIf="albums$ else noAlbums" class="d-flex flex-column align-items-center">
     <table class="table table-striped">
         <thead style="background: silver;">

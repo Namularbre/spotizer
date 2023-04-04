@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { Album } from 'src/app/models/album';
 import { AlbumService } from 'src/app/services/album.service';
 
@@ -16,12 +16,22 @@ export class AlbumsComponent {
 
   constructor(private service : AlbumService, private formBuilder : FormBuilder) {
     this.researchForm = this.formBuilder.group({
-      name : ['', Validators.required]
+      title : ['', Validators.required]
     });
   }
 
   ngOnInit() {
+    document.querySelector("#nav-albums")!.classList.add("active");
+
     this.albums$ = this.service.getAlbums();
   }
+
+  onSubmit() {
+    this.albums$ = this.service.getSearchedAlbum(this.researchForm.value.title);
+    this.searchedField = this.researchForm.value.title;
+    //document.querySelector("#page-number")!.textContent = "1";
+  }
+
+
 
 }
