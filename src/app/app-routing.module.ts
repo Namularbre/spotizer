@@ -4,6 +4,7 @@ import { AccueilComponent } from './components/accueil/accueil.component';
 import { ArtistComponent } from './components/artist/artist.component';
 import { ArtistsComponent } from './components/artists/artists.component';
 import { SongsComponent } from './components/songs/songs.component';
+import { AlbumsComponent } from './components/albums/albums.component';
 
 const routes: Routes = [
   {
@@ -24,6 +25,10 @@ const routes: Routes = [
         component: ArtistComponent
       }
     ]
+  },
+  {
+    path: "albums",
+    component : AlbumsComponent
   }
 ];
 
