@@ -34,4 +34,12 @@ export class PlaylistService {
 
     this.httpClient.patch(url, {songs : JSON.stringify(songs)});
   }
+
+  removeSongs(id : number, songs : Song[]): void {
+    
+  }
+
+  savePlaylist(playlist : Playlist): void {
+    //TODO: save playlist
+  }
 }
