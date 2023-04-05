@@ -11,7 +11,7 @@ export class AlbumService {
   constructor(private httpClient : HttpClient) { }
 
   getAlbums(page : number = 1, search : string = ""): Observable<Album[]> {
-    const url = `https://mmi.unilim.fr/~morap01/L250/public/index.php/api/albums?page=${page}&name=${search}`;
+    const url = `https://mmi.unilim.fr/~morap01/L250/public/index.php/api/albums?page=${page}&title=${search}`;
 
     return this.httpClient.get<Album[]>(url).pipe(
       map((rawAlbums) => { 
