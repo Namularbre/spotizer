@@ -31,7 +31,7 @@ export class AlbumService {
   }
 
   getSearchedAlbum(search : string = "") : Observable<Album[]> {
-    const getAlbumUrl = `https://mmi.unilim.fr/~morap01/L250/public/index.php/api/albums?title=${search}`;
+    const getAlbumUrl = `https://mmi.unilim.fr/~morap01/L250/public/index.php/api/albums?name=${search}`;
 
     return this.httpClient.get<Album[]>(getAlbumUrl).pipe(
       map((rawAlbums : Object[]) => {
