@@ -32,6 +32,27 @@ export class AlbumsComponent {
     //document.querySelector("#page-number")!.textContent = "1";
   }
 
+  onPreviousClick() {
+    let page: number = Number(document.getElementById("page-number")!.textContent);
+    if (page - 1 >= 1) {
+      page -= 1;
+      this.albums$ = this.service.getAlbums(page, this.searchedField);
+      document.getElementById("page-number")!.textContent = page.toString();
+    }
+  }
+
+  onNextClick() {
+    let page: number = Number(document.getElementById("page-number")!.textContent);
+    this.service.getAlbums(page + 1, this.searchedField).subscribe(
+      (res) => {
+        if (res.length) {
+          page += 1;
+          this.albums$ = this.service.getAlbums(page, this.searchedField);
+          document.getElementById("page-number")!.textContent = page.toString();
+        }
+      }
+    );
+  }
 
 
 }

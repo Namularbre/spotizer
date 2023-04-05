@@ -20,6 +20,25 @@
             </tr>
         </tbody>
     </table>
+    <nav aria-label="albums-pagination">
+        <ul class="pagination">
+            <li class="page-item">
+                <button class="page-link" (click)="onPreviousClick()">
+                    <
+                </button>
+            </li>
+            <li class="page-item">
+                <span class="page-link active" id="page-number">
+                    1
+                </span>
+            </li>
+            <li class="page-item">
+                <button class="page-link" (click)="onNextClick()">
+                    >
+                </button>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 <ng-template #noAlbums>
