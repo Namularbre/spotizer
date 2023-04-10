@@ -19,12 +19,10 @@ const routes: Routes = [
   {
     path : "artists",
     component : ArtistsComponent,
-    children : [
-      {
-        path: ":id",
-        component: ArtistComponent
-      }
-    ]
+  },
+  {
+    path: "artists/:id",
+    component: ArtistComponent
   },
   {
     path: "albums",
