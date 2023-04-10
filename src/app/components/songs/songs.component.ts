@@ -35,6 +35,7 @@ export class SongsComponent {
             this.songs.push(newSong);
             this.songs$ = of(this.songs);
           });
+          document.getElementById("title")!.textContent = "Musiques de l'album \"" + album.title + "\"";
         });
       } else {
         this.songs$ = this.service.getSongs();

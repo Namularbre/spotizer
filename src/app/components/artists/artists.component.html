@@ -7,7 +7,6 @@
 </form>
 
 <div *ngIf="artists$ else noArtists" class="d-flex flex-column align-items-center">
-    <p>Il y a {{ (artists$ | async)?.length }} résultat(s)</p>
     <table class="table table-striped">
         <thead style="background-color: silver;">
             <tr>

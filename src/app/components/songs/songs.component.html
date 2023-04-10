@@ -1,4 +1,4 @@
-<h2>Nos musiques</h2>
+<h2 id="title">Nos musiques</h2>
 
 <form (ngSubmit)="onSubmit()" [formGroup]="researchForm">
     <label for="title">Rechercher une musique par titre</label>
@@ -7,7 +7,6 @@
 </form>
 
 <div *ngIf="songs$ else noSongs" class="d-flex flex-column align-items-center">
-    <p>Il y a {{ (songs$ | async)?.length }} résultat(s)</p>
     <table class="table table-striped">
         <thead style="background-color: silver;">
             <tr>

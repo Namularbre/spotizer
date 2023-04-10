@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, map, switchMap } from 'rxjs';
 import { Album } from 'src/app/models/album';
 import { AlbumService } from 'src/app/services/album.service';
+import { ArtistService } from 'src/app/services/artist.service';
 
 @Component({
   selector: 'app-albums',
@@ -15,7 +16,7 @@ export class AlbumsComponent {
   researchForm! : FormGroup;
   searchedField : string = "";
 
-  constructor(private service : AlbumService, private formBuilder : FormBuilder, private route: ActivatedRoute) {
+  constructor(private service : AlbumService, private artistService : ArtistService, private formBuilder : FormBuilder, private route: ActivatedRoute) {
     this.researchForm = this.formBuilder.group({
       title : ['', Validators.required]
     });
@@ -27,6 +28,9 @@ export class AlbumsComponent {
     this.route.params.subscribe(params => {
       if (params["id"]) {
         this.albums$ = this.service.getAlbumsFromArtist(parseInt(params["id"]));
+        this.artistService.getArtistById(parseInt(params["id"])).subscribe(artist => {
+          document.getElementById("title")!.textContent = "Albums de \"" + artist.name + "\"";
+        });
       } else {
         this.albums$ = this.service.getAlbums();
       }
