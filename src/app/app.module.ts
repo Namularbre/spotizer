@@ -15,6 +15,7 @@ import { AccueilComponent } from './components/accueil/accueil.component';
 import { AlbumsComponent } from './components/albums/albums.component';
 import { AlbumTypeComponent } from './components/album-type/album-type.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
+import { PlaylistsComponent } from './components/playlists/playlists.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { PlaylistComponent } from './components/playlist/playlist.component';
     AccueilComponent,
     AlbumsComponent,
     AlbumTypeComponent,
-    PlaylistComponent
+    PlaylistComponent,
+    PlaylistsComponent
   ],
   imports: [
     RouterModule,
