@@ -12,7 +12,7 @@ import { AlbumService } from 'src/app/services/album.service';
 })
 export class AlbumsComponent {
   albums$! : Observable<Album[]>;
-  researchForm : FormGroup;
+  researchForm! : FormGroup;
   searchedField : string = "";
 
   constructor(private service : AlbumService, private formBuilder : FormBuilder, private route: ActivatedRoute) {
@@ -35,8 +35,9 @@ export class AlbumsComponent {
 
   onSubmit() {
     this.albums$ = this.service.getSearchedAlbum(this.researchForm.value.title);
+
     this.searchedField = this.researchForm.value.title;
-    //document.querySelector("#page-number")!.textContent = "1";
+    document.querySelector("#page-number")!.textContent = "1";
   }
 
   onPreviousClick() {
@@ -60,6 +61,4 @@ export class AlbumsComponent {
       }
     );
   }
-
-
 }

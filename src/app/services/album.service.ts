@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable, map, switchMap } from 'rxjs';
 import { Album } from '../models/album';
 import { ArtistService } from './artist.service';
+import { AlbumType } from '../models/albumtype';
+import { Artist } from '../models/artist';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +17,14 @@ export class AlbumService {
     const url = `https://mmi.unilim.fr/~morap01/L250/public/index.php/api/albums?page=${page}&title=${search}`;
 
     return this.httpClient.get<Album[]>(url).pipe(
-      map((rawAlbums) => { 
-        return rawAlbums.map((rawAlbum) => <Album> rawAlbum) 
+      map((rawAlbums) => {
+        let albums : Album[] = rawAlbums.map(rawAlbum => <Album> rawAlbum);
+
+        albums.forEach((album : Album) => {
+          album.albumtype = <AlbumType> album.albumtype;
+        });
+        
+        return albums;
       })
     );
   }
@@ -32,11 +40,18 @@ export class AlbumService {
   }
 
   getSearchedAlbum(search : string = "") : Observable<Album[]> {
-    const getAlbumUrl = `https://mmi.unilim.fr/~morap01/L250/public/index.php/api/albums?name=${search}`;
+    const getAlbumUrl = `https://mmi.unilim.fr/~morap01/L250/public/index.php/api/albums?title=${search}`;
 
     return this.httpClient.get<Album[]>(getAlbumUrl).pipe(
       map((rawAlbums : Object[]) => {
-        return rawAlbums.map(rawAlbum => <Album> rawAlbum);
+        console.log(rawAlbums);
+        let albums : Album[] = rawAlbums.map(rawAlbum => <Album> rawAlbum);
+
+        albums.forEach((album : Album) => {
+          album.albumtype = <AlbumType> album.albumtype;
+        });
+      
+        return albums;
       })
     );
   }
