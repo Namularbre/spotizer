@@ -15,7 +15,10 @@ const routes: Routes = [
   {
     path : "songs",
     component : SongsComponent
-    //children //cf TD3 ! Pas fini, mais ce genre de route est testée et approuvée !
+  },
+  {
+    path : "songs/:id",
+    component : SongsComponent
   },
   {
     path : "artists",
