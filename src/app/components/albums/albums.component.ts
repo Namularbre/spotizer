@@ -28,7 +28,7 @@ export class AlbumsComponent {
 
   onSubmit() {
     this.albums$ = this.service.getSearchedAlbum(this.researchForm.value.title);
-    
+
     this.searchedField = this.researchForm.value.title;
     document.querySelector("#page-number")!.textContent = "1";
   }

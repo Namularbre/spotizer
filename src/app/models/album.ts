@@ -3,7 +3,7 @@ import { Artist } from "./artist";
 import { Song } from "./song";
 
 export class Album {
-    constructor(private readonly _id : number, private _title : string, private _songs : Song[], private _albumType : AlbumType, private _artist : Artist, private _image : string) {}
+    constructor(private readonly _id : number, private _title : string, private _songs : Song[], private _albumtype : AlbumType, private _artist : Artist, private _image : string) {}
 
     public get id() : number {
         return this._id;
@@ -17,8 +17,8 @@ export class Album {
         return this._songs;
     }
 
-    public get albumType() : AlbumType {
-        return this._albumType;
+    public get albumtype() : AlbumType {
+        return this._albumtype;
     }
 
     public get artist() : Artist {
@@ -27,5 +27,9 @@ export class Album {
 
     public get image() : string {
         return this._image;
+    }
+
+    public set albumtype(type : AlbumType) {
+        this._albumtype = type;
     }
 }

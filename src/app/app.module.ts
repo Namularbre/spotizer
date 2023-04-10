@@ -13,6 +13,7 @@ import { ArtistComponent } from './components/artist/artist.component';
 import { ArtistNameComponent } from './components/artist-name/artist-name.component';
 import { AccueilComponent } from './components/accueil/accueil.component';
 import { AlbumsComponent } from './components/albums/albums.component';
+import { AlbumTypeComponent } from './components/album-type/album-type.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AlbumsComponent } from './components/albums/albums.component';
     ArtistComponent,
     ArtistNameComponent,
     AccueilComponent,
-    AlbumsComponent
+    AlbumsComponent,
+    AlbumTypeComponent
   ],
   imports: [
     RouterModule,

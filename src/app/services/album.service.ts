@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { Album } from '../models/album';
+import { AlbumType } from '../models/albumtype';
+import { Artist } from '../models/artist';
 
 @Injectable({
   providedIn: 'root'
@@ -14,8 +16,14 @@ export class AlbumService {
     const url = `https://mmi.unilim.fr/~morap01/L250/public/index.php/api/albums?page=${page}&title=${search}`;
 
     return this.httpClient.get<Album[]>(url).pipe(
-      map((rawAlbums) => { 
-        return rawAlbums.map((rawAlbum) => <Album> rawAlbum) 
+      map((rawAlbums) => {
+        let albums : Album[] = rawAlbums.map(rawAlbum => <Album> rawAlbum);
+
+        albums.forEach((album : Album) => {
+          album.albumtype = <AlbumType> album.albumtype;
+        });
+        
+        return albums;
       })
     );
   }
@@ -35,8 +43,14 @@ export class AlbumService {
 
     return this.httpClient.get<Album[]>(getAlbumUrl).pipe(
       map((rawAlbums : Object[]) => {
-        
-        return rawAlbums.map(rawAlbum => <Album> rawAlbum);
+        console.log(rawAlbums);
+        let albums : Album[] = rawAlbums.map(rawAlbum => <Album> rawAlbum);
+
+        albums.forEach((album : Album) => {
+          album.albumtype = <AlbumType> album.albumtype;
+        });
+      
+        return albums;
       })
     );
   }

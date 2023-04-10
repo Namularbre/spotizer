@@ -11,11 +11,13 @@
         <thead style="background: silver;">
             <tr>
                 <th scope="col">Titre</th>
+                <th scope="col">Genre</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let album of albums$ | async">
                 <td>{{ album.title }}</td>
+                <td>{{ album.albumtype.name }}</td>
             </tr>
         </tbody>
     </table>
