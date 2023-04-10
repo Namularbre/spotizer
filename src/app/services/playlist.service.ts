@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Playlist } from '../models/playlist';
-import { Observable, map, of } from 'rxjs';
+import { Observable, filter, map, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Song } from '../models/song';
 
@@ -8,9 +8,23 @@ import { Song } from '../models/song';
   providedIn: 'root'
 })
 export class PlaylistService {
-  playlists$! : Playlist;
-
   constructor(private httpClient : HttpClient) { }
+
+  getPlaylists() : Observable<Playlist[]> {
+    let playlists : Playlist[] = [];
+    
+    for (let index = 0; index < sessionStorage.length; index++) {
+      let id : string = sessionStorage.getItem(`${index}`)!;
+
+      console.log(id, sessionStorage);
+
+      if (!isNaN( parseInt(id))) {
+        this.getPlaylist(parseInt(id)).subscribe(playlist => playlists.push(playlist));
+      }
+    }
+
+    return of(playlists);
+  }
 
   getPlaylist(id : number) : Observable<Playlist> {
     const url = `https://mmi.unilim.fr/~morap01/L250/public/index.php/api/playlists/${id}`;
@@ -22,11 +36,31 @@ export class PlaylistService {
     );
   }
 
-  addPlaylist(playlist : Playlist): void {
+  getSearchedPlaylists(name : string) : Observable<Playlist[]> {
+    let playlists! : Playlist[];
+
+    for (let index = 0; index < sessionStorage.length; index++) {
+      let id : string = sessionStorage.getItem(`${index}`)!;
+      this.getPlaylist(parseInt(id)).subscribe(playlist => playlists.push(playlist));
+    }
+
+    playlists.filter(playlist => playlist.name.includes(name));
+
+    return of(playlists);
+  }
+
+  addPlaylist(name : string): void {
     const url = `https://mmi.unilim.fr/~morap01/L250/public/index.php/api/playlists`;
 
-    this.httpClient.post<any>(url, {name : playlist.name}).subscribe(data => { console.log(data)});
-    sessionStorage.setItem(`${playlist.id}`, `${playlist.id}`);
+    let nextId : number = parseInt(sessionStorage.getItem(`${sessionStorage.length}`)!);
+
+    if (isNaN(nextId)) {
+      nextId = 0;
+    }
+
+    this.httpClient.post<any>(url, {name : name}).subscribe(data => {
+      sessionStorage.setItem(`${nextId}`, `${data.id}`);
+    });
   }
 
   addSongs(id : number, songs : Song[]): void {
