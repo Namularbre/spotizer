@@ -1,5 +1,5 @@
 <div *ngIf="playlist$ | async as playlist">
-    <h2>{{ playlist.name }}</h2>
+    <h2 class="m-3">{{ playlist.name }}</h2>
     <table class="table table-striped">
         <thead style="background: silver;">
             <tr>
@@ -7,6 +7,7 @@
                 <th scope="col">Titre</th>
                 <th scope="col">Longueur</th>
                 <th scope="col">Youtube</th>
+                <th scope="col">Suppression</th>
             </tr>
         </thead>
         <tbody>
@@ -15,6 +16,7 @@
                 <td>{{ song.title }}</td>
                 <td>{{ song.length }} secondes</td>
                 <td><a href="{{ song.youtube }}">lien</a></td>
+                <td><button class="btn btn-danger" (click)="onRemove(song.id)">-</button></td>
             </tr>
         </tbody>
     </table>
