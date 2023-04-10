@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, map } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { Observable, map, switchMap } from 'rxjs';
 import { Album } from 'src/app/models/album';
 import { AlbumService } from 'src/app/services/album.service';
 
@@ -14,7 +15,7 @@ export class AlbumsComponent {
   researchForm : FormGroup;
   searchedField : string = "";
 
-  constructor(private service : AlbumService, private formBuilder : FormBuilder) {
+  constructor(private service : AlbumService, private formBuilder : FormBuilder, private route: ActivatedRoute) {
     this.researchForm = this.formBuilder.group({
       title : ['', Validators.required]
     });
@@ -23,7 +24,13 @@ export class AlbumsComponent {
   ngOnInit() {
     document.querySelector("#nav-albums")!.classList.add("active");
 
-    this.albums$ = this.service.getAlbums();
+    this.route.params.subscribe(params => {
+      if (params["id"]) {
+        this.albums$ = this.service.getAlbumsFromArtist(parseInt(params["id"]));
+      } else {
+        this.albums$ = this.service.getAlbums();
+      }
+    });
   }
 
   onSubmit() {

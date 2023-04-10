@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, map } from 'rxjs';
+import { Observable, map, switchMap } from 'rxjs';
 import { Album } from '../models/album';
+import { ArtistService } from './artist.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlbumService {
 
-  constructor(private httpClient : HttpClient) { }
+  constructor(private httpClient : HttpClient, private artistService : ArtistService) { }
 
   getAlbums(page : number = 1, search : string = ""): Observable<Album[]> {
     const url = `https://mmi.unilim.fr/~morap01/L250/public/index.php/api/albums?page=${page}&title=${search}`;
@@ -36,6 +37,19 @@ export class AlbumService {
     return this.httpClient.get<Album[]>(getAlbumUrl).pipe(
       map((rawAlbums : Object[]) => {
         return rawAlbums.map(rawAlbum => <Album> rawAlbum);
+      })
+    );
+  }
+
+  getAlbumsFromArtist(id : number) : Observable<Album[]> {
+    return this.artistService.getArtistById(id).pipe(
+      switchMap(artist => {
+        const getAlbumUrl = `https://mmi.unilim.fr/~morap01/L250/public/index.php/api/albums?artist.name=${artist.name}`;
+        return this.httpClient.get<Album[]>(getAlbumUrl).pipe(
+          map((rawAlbums: Object[]) => {
+            return rawAlbums.map(rawAlbum => <Album>rawAlbum);
+          })
+        );
       })
     );
   }

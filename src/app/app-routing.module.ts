@@ -26,7 +26,11 @@ const routes: Routes = [
   },
   {
     path: "albums",
-    component : AlbumsComponent
+    component : AlbumsComponent,
+  },
+  {
+    path: "albums/:id",
+    component : AlbumsComponent,
   }
 ];
 
