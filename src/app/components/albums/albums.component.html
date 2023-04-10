@@ -2,7 +2,7 @@
 
 <form (ngSubmit)="onSubmit()" [formGroup]="researchForm">
     <label for="title">Rechercher un album</label>
-    <input type="text" formArrayName="title">
+    <input type="text" formControlName="title">
     <button type="submit">Rechercher</button>
 </form>
 
@@ -11,7 +11,6 @@
         <thead style="background: silver;">
             <tr>
                 <th scope="col">Titre</th>
-                <th score="col">Musiques</th>
             </tr>
         </thead>
         <tbody>
