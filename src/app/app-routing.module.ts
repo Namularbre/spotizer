@@ -5,6 +5,7 @@ import { ArtistComponent } from './components/artist/artist.component';
 import { ArtistsComponent } from './components/artists/artists.component';
 import { SongsComponent } from './components/songs/songs.component';
 import { AlbumsComponent } from './components/albums/albums.component';
+import { PlaylistComponent } from './components/playlist/playlist.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: "albums/:id",
     component : AlbumsComponent,
+  },
+  {
+    path: "playlist/:id",
+    component : PlaylistComponent,
   }
 ];
 

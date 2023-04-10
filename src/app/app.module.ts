@@ -14,6 +14,7 @@ import { ArtistNameComponent } from './components/artist-name/artist-name.compon
 import { AccueilComponent } from './components/accueil/accueil.component';
 import { AlbumsComponent } from './components/albums/albums.component';
 import { AlbumTypeComponent } from './components/album-type/album-type.component';
+import { PlaylistComponent } from './components/playlist/playlist.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { AlbumTypeComponent } from './components/album-type/album-type.component
     ArtistNameComponent,
     AccueilComponent,
     AlbumsComponent,
-    AlbumTypeComponent
+    AlbumTypeComponent,
+    PlaylistComponent
   ],
   imports: [
     RouterModule,

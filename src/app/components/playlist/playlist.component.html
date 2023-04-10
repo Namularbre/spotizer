@@ -1,0 +1,21 @@
+<div *ngIf="playlist$ | async as playlist">
+    <h2>{{ playlist.name }}</h2>
+    <table class="table table-striped">
+        <thead style="background: silver;">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Titre</th>
+                <th scope="col">Longueur</th>
+                <th scope="col">Youtube</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let song of playlist.songs">
+                <th id="{{ song.id }}">{{ song.id }}</th>
+                <td>{{ song.title }}</td>
+                <td>{{ song.length }} secondes</td>
+                <td><a href="{{ song.youtube }}">lien</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

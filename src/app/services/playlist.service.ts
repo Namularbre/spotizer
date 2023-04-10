@@ -17,6 +17,8 @@ export class PlaylistService {
 
     return this.httpClient.get<Playlist>(url).pipe(
       map((rawPlaylist : Object) => {
+        console.log(rawPlaylist);
+        
         return <Playlist> rawPlaylist;
       })
     );

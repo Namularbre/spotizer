@@ -18,8 +18,6 @@ export class ArtistComponent {
   constructor(private service : ArtistService, private route : ActivatedRoute) {}
 
   ngOnInit() {
-    console.log("test");
-    
     this.route.params.subscribe(params => {
       this.id = parseInt(params['id']);
     });
