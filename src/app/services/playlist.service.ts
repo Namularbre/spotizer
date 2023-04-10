@@ -17,8 +17,6 @@ export class PlaylistService {
 
     return this.httpClient.get<Playlist>(url).pipe(
       map((rawPlaylist : Object) => {
-        console.log(rawPlaylist);
-        
         return <Playlist> rawPlaylist;
       })
     );
@@ -37,7 +35,13 @@ export class PlaylistService {
     this.httpClient.patch(url, {songs : JSON.stringify(songs)});
   }
 
-  removeSongs(id : number, songs : Song[]): void {
+  removeSong(playlist : Playlist, songToRemove : Song): void {
+    const url = `https://mmi.unilim.fr/~morap01/L250/public/index.php/api/playlists/${playlist.id}`;
+
+    let songs : Song[] = playlist.songs.filter(song => { song !== songToRemove });
+
+    playlist.songs = songs;
     
+    this.httpClient.patch(url, playlist);
   }
 }

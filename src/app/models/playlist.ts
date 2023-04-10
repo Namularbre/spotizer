@@ -14,4 +14,8 @@ export class Playlist {
     public get songs() : Song[] {
         return this._songs;
     }
+
+    public set songs(songs : Song[]) {
+        this._songs = songs;
+    }
 }
