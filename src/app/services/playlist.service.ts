@@ -22,11 +22,11 @@ export class PlaylistService {
     );
   }
 
-  addPlaylist(name : string): void {
+  addPlaylist(playlist : Playlist): void {
     const url = `https://mmi.unilim.fr/~morap01/L250/public/index.php/api/playlists`;
 
-    this.httpClient.post<any>(url, {name : name}).subscribe(data => { console.log(data)});
-    
+    this.httpClient.post<any>(url, {name : playlist.name}).subscribe(data => { console.log(data)});
+    sessionStorage.setItem(`${playlist.id}`, `${playlist.id}`);
   }
 
   addSongs(id : number, songs : Song[]): void {
@@ -37,9 +37,5 @@ export class PlaylistService {
 
   removeSongs(id : number, songs : Song[]): void {
     
-  }
-
-  savePlaylist(playlist : Playlist): void {
-    //TODO: save playlist
   }
 }
